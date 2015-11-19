@@ -1,0 +1,24 @@
+# Create a machine with Docker
+machine:
+  services:
+    - docker
+
+# Make sure valid docker-compose installed
+dependencies:
+  override:
+    - sudo pip install --upgrade docker-compose==1.3.3
+
+# For our tests, specify that we want to do the following:
+# Compose the app
+# Change into the app directory, and run tests
+test:
+  override:
+    - docker-compose run -d --no-deps web
+    - cd app; npm test
+
+# Should the tests pass, we deploy master branch
+deployment:
+  hub:
+    branch: master
+    commands:
+      - $DEPLOY
