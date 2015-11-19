@@ -61,6 +61,8 @@ module.exports.getProductByID = function(product_id) {
 	// For each product
 	db.products.map(function(product) {
 
+
+
 		// If this product's id matches product_id, resolve promise, else do nothing
 		if (product.id === product_id) deferred.resolve(product);
 	})

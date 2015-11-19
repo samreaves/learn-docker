@@ -29,7 +29,7 @@ products_route.get('/', function(req, res) {
 	products_model.getAllProducts().then(function(products) {
 
 		// Send product data in json format
-		res.status(200).send(JSON.stringify(products));
+		res.status(200).send(products);
 	}, 
 	function(err) {
 		res.status(500).end("Problem grabbing products");
@@ -43,7 +43,7 @@ products_route.get('/', function(req, res) {
 products_route.get('/:product_id', function(req, res) {
 
 	// Cache productname from request
-	var product_id = req.params.product_id;
+	var product_id = Number(req.params.product_id);
 
 	// Grab product with request's productname
 	products_model.getProductByID(product_id)
@@ -58,12 +58,12 @@ products_route.get('/:product_id', function(req, res) {
 			else {
 
 				// Send product data in json format
-				res.status(200).send(JSON.stringify(product));
+				res.status(200).send(product);
 			}
 		})
 		.catch(function(error) {
 			console.error(error);
-			res.status(404).end("User does not exist");
+			res.status(404).end("Product does not exist");
 		});
 });
 
