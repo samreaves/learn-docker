@@ -2,10 +2,23 @@
   "name": "learn-docker",
   "version": "1.0.0",
   "description": "Practicing continuous integration and deployment with Docker",
-  "main": "index.js",
+  "main": "src/app.js",
   "scripts": {
-    "test": "test"
+    "start": "node src/server/app.js",
+    "test": "mocha -R spec src/server/test/test.js"
   },
   "author": "Sam Reaves <thesamreaves@gmail.com> (http://www.github.com/samreaves)",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "1.14.1",
+    "cors": "2.7.1",
+    "express": "4.13.3",
+    "morgan": "1.6.1",
+    "path": "0.12.7",
+    "q": "1.4.1"
+  },
+  "devDependencies": {
+    "mocha": "2.3.4",
+    "supertest": "1.1.0"
+  }
 }
