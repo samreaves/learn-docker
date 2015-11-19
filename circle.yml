@@ -13,7 +13,7 @@ dependencies:
 # Change into the app directory, and run tests
 test:
   override:
-    - docker-compose up
+    - docker-compose up -d
     - cd app; npm test
 
 # Should the tests pass, we deploy master branch
