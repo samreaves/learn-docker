@@ -6,7 +6,7 @@ web:
 
   # Mount volume of local files
   volumes:
-    - "./app:/app"
+    - "./app:/src/app"
 
   # Map machines port 80 with container's 3000
   ports:
