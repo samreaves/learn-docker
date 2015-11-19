@@ -41,4 +41,25 @@ describe('server tests', function () {
     		.expect(200, done);
   	});
 
+    // Make sure server responds to products endpoint
+  	it('responds to /api/products', function testProducts(done) {
+  	    request(server)
+    		.get('/api/products')
+    		.expect(200, done);
+  	});
+
+  	// Make sure server responds to products by id endpoint
+  	it('responds to /api/products/:product_id', function testProductsByID(done) {
+  	    request(server)
+    		.get('/api/products')
+    		.expect(200, done);
+  	});
+
+  	// Make sure server does not responds to bullshit endpoint
+  	it('404s on /api/bullshit', function testBullshitEndpoint(done) {
+  	    request(server)
+    		.get('/api/bullshit')
+    		.expect(404, done);
+  	});
+
 });
