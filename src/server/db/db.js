@@ -42,4 +42,4 @@ module.exports.products = [
 		price: 275, 
 		volume: "42.6 Cubic Feet"
 	}
-]
+];
