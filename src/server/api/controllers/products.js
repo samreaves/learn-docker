@@ -40,10 +40,10 @@ products_route.get('/', function(req, res) {
 
 // Route that grabs productname from products
 // Verifies that product exists before returing info
-products_route.get('/:id', function(req, res) {
+products_route.get('/:product_id', function(req, res) {
 
 	// Cache productname from request
-	var product_id = req.params.id;
+	var product_id = req.params.product_id;
 
 	// Grab product with request's productname
 	products_model.getProductByID(product_id)
