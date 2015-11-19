@@ -1,0 +1,9 @@
+# Our web container
+web:
+
+  # Root directory is built
+  build: ./app
+
+  # Map machines port 80 with container's 3000
+  ports:
+   - "80:3000"
