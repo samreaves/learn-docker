@@ -14,8 +14,7 @@ dependencies:
 test:
   override:
     - docker-compose run -d --no-deps web
-    - cd app 
-    - ls
+    - cd app; ls
     - npm test
 
 # Should the tests pass, we deploy master branch
