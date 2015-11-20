@@ -16,11 +16,6 @@ WORKDIR /src
 # Add local current directory to container's src directory
 ADD . /src
 
-# Install dependencies
-RUN npm install
-
-RUN ls
-
 # Open port 3000
 EXPOSE 3000
 

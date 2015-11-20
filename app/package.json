@@ -4,6 +4,7 @@
   "description": "Practicing continuous integration and deployment with Docker",
   "main": "src/app.js",
   "scripts": {
+    "prestart": "npm install",
     "start": "node src/server/app.js",
     "test": "mocha -R spec src/server/test/test.js"
   },
