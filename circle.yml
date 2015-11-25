@@ -3,21 +3,26 @@ machine:
   services:
     - docker
 
-# Make sure valid docker-compose installed
+# Specify dependencies
 dependencies:
+
+  # Upgrade Docker-Compose to a certain version
   override:
     - sudo pip install --upgrade docker-compose==1.3.3
 
+  # Since package.json inside app folder, must install node modules manually on Circle CI machine
   post: 
     - cd app; npm install
 
-# For our tests, specify that we want to do the following:
-# Run container
-# Change into app directory, look around, and test
+
+# Override CircleCI tests
 test:
   override:
+
+    # Run container
     - docker-compose run -d --no-deps web
-    - cd app; ls
+
+    # Change into app directory, look around, and test
     - cd app; npm test
 
 # Should the tests pass, we deploy master branch
