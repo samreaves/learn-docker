@@ -19,9 +19,6 @@ ADD . /src
 # Install dependencies
 RUN npm install
 
-# Look around for node_modules
-RUN ls
-
 # Open port 3000
 EXPOSE 3000
 
