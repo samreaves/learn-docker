@@ -14,7 +14,7 @@ dependencies:
 # For our tests, specify that we want to do the following:
 # Run container
 # Change into app directory, look around, and test
-# test:
+test:
   override:
     - docker-compose run -d --no-deps web
     - cd app; ls
