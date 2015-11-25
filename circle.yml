@@ -13,6 +13,7 @@ dependencies:
   # Upgrade Docker-Compose to a certain version
   override:
     - sudo pip install --upgrade docker-compose==1.3.3
+    - docker build -t samreaves/learn-docker .
 
   # Since package.json inside app folder, must install node modules manually on Circle CI machine
   post: 
