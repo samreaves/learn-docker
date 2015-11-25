@@ -8,11 +8,17 @@ dependencies:
   override:
     - sudo pip install --upgrade docker-compose==1.3.3
 
+  post: 
+    - cd app; npm install
+
 # For our tests, specify that we want to do the following:
-# Ride a bull and pray Circle CI knows better than I do what to do on Circle CI
+# Run container
+# Change into app directory, look around, and test
 # test:
-#   override:
-#     - docker-compose run -d --no-deps web
+  override:
+    - docker-compose run -d --no-deps web
+    - cd app; ls
+    - cd app; npm test
 
 # Should the tests pass, we deploy master branch
 deployment:
