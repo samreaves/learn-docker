@@ -7,12 +7,19 @@ machine:
     - sudo curl -L -o /usr/bin/docker 'http://s3-external-1.amazonaws.com/circle-downloads/docker-1.9.0-circleci'
     - sudo chmod 0755 /usr/bin/docker
 
-# Specify dependencies
+# Override CircleCI dependencies
 dependencies:
-
-  # Upgrade Docker-Compose to a certain version
   override:
-    - sudo pip install --upgrade docker-compose==1.3.3
+
+    # Download Docker-Compose 1.5.1 and give it permission
+    - curl -L https://github.com/docker/compose/releases/download/1.5.1/docker-compose-Linux-x86_64 > /home/ubuntu/bin/docker-compose
+    - chmod +x /home/ubuntu/bin/docker-compose
+
+    # Download Amazon's Elastic Container Service and give it permission
+    #- curl -L https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest > /home/ubuntu/bin/ecs-cli
+    #- chmod +x /home/ubuntu/bin/ecs-cli
+
+    # Build my docker image to be deployed if tests pass
     - docker build -t samreaves/learn-docker ./app
 
   # Since package.json inside app folder, must install node modules manually on Circle CI machine
