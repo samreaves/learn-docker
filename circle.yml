@@ -21,8 +21,8 @@ dependencies:
     # Build my docker image to be deployed if tests pass
     - docker build -t samreaves/learn-docker ./app
 
-    # Clean up any dangling images. These can take up an enourmous amount of space if not pruned.
-    - docker rmi $(docker images -f "dangling=true" -q)
+    # Clean up any dangling images. If no images to prune, don't run.
+    - docker images --quiet --filter=dangling=true | xargs --no-run-if-empty docker rmi   
 
   # Since package.json inside app folder, must install node modules manually on Circle CI machine
   post: 
