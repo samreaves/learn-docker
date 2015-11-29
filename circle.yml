@@ -1,8 +1,11 @@
-# Create a machine with Docker
+# Create a machine on Circle CI
 machine:
+
+  # Preload Docker onto our machine
   services:
     - docker
 
+  # Before doing anything, download Docker 1.9.0 and give it permission to do administrator things.
   pre:
     - sudo curl -L -o /usr/bin/docker 'http://s3-external-1.amazonaws.com/circle-downloads/docker-1.9.0-circleci'
     - sudo chmod 0755 /usr/bin/docker
@@ -15,12 +18,11 @@ dependencies:
     - curl -L https://github.com/docker/compose/releases/download/1.5.1/docker-compose-Linux-x86_64 > /home/ubuntu/bin/docker-compose
     - chmod +x /home/ubuntu/bin/docker-compose
 
-    # Download Amazon's Elastic Container Service and give it permission
-    #- curl -L https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest > /home/ubuntu/bin/ecs-cli
-    #- chmod +x /home/ubuntu/bin/ecs-cli
-
     # Build my docker image to be deployed if tests pass
     - docker build -t samreaves/learn-docker ./app
+
+    # Clean up any dangling images. These can take up an enourmous amount of space if not pruned.
+    - docker rmi $(docker images -f "dangling=true" -q)
 
   # Since package.json inside app folder, must install node modules manually on Circle CI machine
   post: 
@@ -34,10 +36,10 @@ test:
     # Run container
     - docker-compose run -d --no-deps web
 
-    # Change into app directory, look around, and test
+    # Change into app directory and test
     - cd app; npm test
 
-# Should the tests pass, we deploy master branch
+# Should the tests pass, we deploy master branch to DockerHub
 deployment:
   hub:
     branch: master
